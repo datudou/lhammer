@@ -67,7 +67,7 @@ def process_simple(doc, tag, v):
     node.appendChild(doc.createTextNode(str(v)))
     return node
 
-def dict2xml(d):
+def dict2xml(d, encoding='utf-8'):
     """Generate a xml string from dict"""
     doc = impl.createDocument(None, None, None)
     if len(d) > 1:
@@ -75,7 +75,7 @@ def dict2xml(d):
         return None
     root, _ = process_complex(doc, d.items())
     doc.appendChild(root[0])
-    return doc.toprettyxml(encoding = 'utf-8', indent = '  ')
+    return doc.toprettyxml(encoding, indent='  ')
 
 if __name__ == '__main__':
     import xml2dict
