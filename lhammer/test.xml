@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<result>
+    <count n="1">10</count>
+    <data><id>491691</id><name>test</name></data>
+    <data>
+        <id>491692</id><name>test2</name>
+    </data>
+    <data>
+        <id>503938</id><name>hello,
+            world</name>
+    </data>
+
+    <empty></empty>
+    <foo>
+        <name>foo</name>
+        bar
+    </foo>
+
+</result>

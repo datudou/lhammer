@@ -12,8 +12,15 @@ def process(doc, tag, v):
 
     Return node or nodelist     # Becarefull here
     """
+    # For extra and useless key 'value' in parent node
+    if tag == 'value' and (v is '' or v is None):
+        return None
+
     if isinstance(v, dict) and v.keys() == ['value']:
         v = v['value']
+        # For empty tags 
+        if v is None:
+            v = ''
 
     # Create a new node for simple values
     if isinstance(v, int) or isinstance(v, str):
@@ -54,6 +61,8 @@ def process_complex(doc, children):
             continue
 
         nodes = process(doc, tag, v)
+        if not nodes: # Ignore useless node
+            continue
         if not isinstance(nodes, list):
             nodes = [nodes]
         nodelist += nodes
@@ -75,12 +84,12 @@ def dict2xml(d, encoding='utf-8'):
         return None
     root, _ = process_complex(doc, d.items())
     doc.appendChild(root[0])
-    return doc.toprettyxml(encoding, indent='  ')
+    return doc.toxml(encoding)
 
 if __name__ == '__main__':
     import xml2dict
     x = xml2dict.XML2Dict()
-    d = x.parse('t5')
+    d = x.parse('test.xml')
     print d
     print dict2xml(d)
 
